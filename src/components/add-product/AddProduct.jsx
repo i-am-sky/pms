@@ -1,55 +1,60 @@
-import React, {  useState } from "react";
-import { addProduct } from '../../services/productservices';
-import './addProduct.css'
+import React, { useState } from "react";
+import { addProduct } from "../../services/productservices";
+import "./addProduct.css";
+import { Link, useNavigate } from "react-router-dom";
 
 function AddProduct() {
+  const [pId, setPId] = useState(0);
+  const [pName, setpName] = useState("");
+  const [pPrice, setPPrice] = useState(0);
+  const [pDesc, setpDesc] = useState("");
+  const [pCode, setPCode] = useState("");
+  const [pRelDate, setPRelDate] = useState("");
+  const [pUrl, setPUrl] = useState("");
+  const [pRating, setPRating] = useState(0);
 
-    const [pId, setPId] = useState(0)
-    const [pName, setpName] = useState('')
-    const [pPrice, setPPrice] = useState(0)
-    const [pDesc, setpDesc] = useState('')
-    const [pCode, setPCode] = useState('')
-    const [pRelDate, setPRelDate] = useState('')
-    const [pUrl, setPUrl] = useState('')
-    const [pRating, setPRating] = useState(0)
+  const navigate = useNavigate();
 
-    const divStyles = {
-      position: 'absolute',
-      top : '80px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: '500px',
-      textAlign: 'left',
-      marginBottom: '50px',
-    }
+  const divStyles = {
+    position: "absolute",
+    top: "80px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "500px",
+    textAlign: "left",
+    marginBottom: "50px",
+  };
 
-    let newProductObj;
+  let newProductObj;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        newProductObj ={
-          "product_id": pId,
-          "product_name": pName,
-          "price": pPrice,
-          "description": pDesc,
-          "product_code": pCode,
-          "release_date": pRelDate,
-          "image_url": pUrl,
-          "star_rating": pRating
-      }
-        // window.alert("Product object created successfully")
-        console.table(newProductObj);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    newProductObj = {
+      product_id: pId,
+      product_name: pName,
+      price: pPrice,
+      description: pDesc,
+      product_code: pCode,
+      release_date: pRelDate,
+      image_url: pUrl,
+      star_rating: pRating,
+    };
+    // window.alert("Product object created successfully")
+    console.table(newProductObj);
 
-        addProduct(newProductObj)
-        .then( (response) => {
-            console.log(response.data);
-            window.alert("Data added successfully");
+    if (window.confirm("do you want to add the product")) {
+      addProduct(newProductObj)
+        .then((response) => {
+          window.alert("Product added successfully");
+          console.log(response.data);
+          navigate("/products");
         })
-        .catch( (err) => {
-            window.alert("Error while adding data");
-            console.log(err);
-        })
+        .catch((err) => {
+          window.alert("Error while adding product");
+          console.log(err);
+        });
     }
+  };
 
   let design = (
     <div className="container m-5" style={divStyles}>
@@ -63,7 +68,7 @@ function AddProduct() {
             id="product_name"
             placeholder="Enter product id"
             // value={pId}
-            onChange={e => setPId(e.target.value)}
+            onChange={(e) => setPId(e.target.value)}
           />
         </div>
 
@@ -75,7 +80,7 @@ function AddProduct() {
             id="product_name"
             placeholder="Enter product name"
             // value={pName}
-            onChange={e => setpName(e.target.value)}
+            onChange={(e) => setpName(e.target.value)}
           />
         </div>
 
@@ -87,7 +92,7 @@ function AddProduct() {
             id="product_name"
             placeholder="Enter product price"
             // value={pPrice}
-            onChange={e => setPPrice(e.target.value)}
+            onChange={(e) => setPPrice(e.target.value)}
           />
         </div>
 
@@ -99,7 +104,7 @@ function AddProduct() {
             id="product_name"
             placeholder="Enter product description"
             // value={pDesc}
-            onChange={e => setpDesc(e.target.value)}
+            onChange={(e) => setpDesc(e.target.value)}
           ></textarea>
         </div>
 
@@ -111,7 +116,7 @@ function AddProduct() {
             id="product_name"
             placeholder="Enter product code"
             // value={pCode}
-            onChange={e => setPCode(e.target.value)}
+            onChange={(e) => setPCode(e.target.value)}
           />
         </div>
 
@@ -123,7 +128,7 @@ function AddProduct() {
             id="product_name"
             placeholder="Enter product release date"
             // value={pRelDate}
-            onChange={e => setPRelDate(e.target.value)}
+            onChange={(e) => setPRelDate(e.target.value)}
           />
         </div>
 
@@ -135,7 +140,7 @@ function AddProduct() {
             id="product_name"
             placeholder="Enter product url"
             // value={pUrl}
-            onChange={e => setPUrl(e.target.value)}
+            onChange={(e) => setPUrl(e.target.value)}
           />
         </div>
 
@@ -147,14 +152,19 @@ function AddProduct() {
             id="product_name"
             placeholder="Enter product rating"
             // value={pRating}
-            onChange={e => setPRating(e.target.value)}
+            onChange={(e) => setPRating(e.target.value)}
           />
         </div>
 
         <div className="text-center">
-          <button className="btn btn-dark w-50 mt-2"  type="submit">
+          <button className="btn btn-dark w-25 mx-3 mt-2 " type="submit">
             Submit
           </button>
+          <Link  to={`/`}>
+          <button className="btn btn-danger w-25 mx-3 mt-2" type="button">
+            Cancle
+          </button>
+          </Link>
         </div>
       </form>
     </div>

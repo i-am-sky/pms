@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { deleteProduct } from "../../services/productservices";
 
 const DeleteProduct = (props) => {
-
   const deleteProductFn = () => {
-    let q = window.confirm("Are you sure you want to delete");
-    if(q==true) {
+    if (window.confirm("Are you sure you want to delete this product?")) {
       deleteProduct(props.productId)
         .then((response) => {
-          console.log("Response : ",response.data);
+          console.log("Response : ", response.data);
           console.log("delete successful");
         })
         .catch((err) => {

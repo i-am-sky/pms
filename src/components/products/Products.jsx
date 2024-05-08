@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../../services/productservices";
 import DeleteProduct from "../delete-product/DeleteProduct";
+import { Link } from "react-router-dom";
+// import SingleProduct from "../single-product/SingleProduct";
 
 const Products = () => {
   const [productData, setProductData] = useState([]);
@@ -29,59 +31,6 @@ const Products = () => {
 
   const selectHandler = (e) => {
     setSelectState(e.target.value);
-  };
-
-  const showProduct = () => {
-    return (
-      <>
-        <button
-          type="button"
-          class="btn btn-primary btn-lg"
-          data-toggle="modal"
-          data-target="#modelId"
-        >
-          Launch
-        </button>
-
-        <div
-          class="modal fade"
-          id="modelId"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modelTitleId"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">Body</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
   };
 
   let design;
@@ -114,14 +63,14 @@ const Products = () => {
           </thead>
           <tbody>
             {productData.map((product) => (
-              <tr key={product.id}>
+              <tr key={product.product_id}>
                 <td>
-                  <a href="#" onClick={showProduct}>
+                  <Link to={`/product/${product.product_id}`} state={product}>
                     <img src={product.image_url} alt="" width={100} />
-                  </a>
+                  </Link>
                 </td>
                 <td>{product.product_name}</td>
-                <td>{product.price}</td>
+                <td>$&nbsp;{product.price}</td>
                 <td>{product.star_rating}</td>
                 <td>
                   <DeleteProduct productId={product.product_id} />

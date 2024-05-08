@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { updateProduct } from "../../services/productservices";
+import { useNavigate, useParams } from "react-router-dom";
 
-function UpdateProduct(props) {
-  const [pId, setPId] = useState(props.productId);
-  const [pName, setpName] = useState("");
-  const [pPrice, setPPrice] = useState(0);
-  const [pDesc, setpDesc] = useState("");
-  const [pCode, setPCode] = useState("");
-  const [pRelDate, setPRelDate] = useState("");
-  const [pUrl, setPUrl] = useState("");
-  const [pRating, setPRating] = useState(0);
+function UpdateProduct() {
+
+  const { productId } = useParams();
+
+  const [pId, setPId] = useState(productId);
+  const [pName, setpName] = useState('');
+  const [pPrice, setPPrice] = useState('');
+  const [pDesc, setpDesc] = useState('');
+  const [pCode, setPCode] = useState('');
+  const [pRelDate, setPRelDate] = useState('');
+  const [pUrl, setPUrl] = useState('');
+  const [pRating, setPRating] = useState('');
+
+  const navigate = useNavigate()
 
   const divStyles = {
     position: "absolute",
@@ -21,11 +27,11 @@ function UpdateProduct(props) {
     marginBottom: "50px",
   };
 
-  let updatedProductObj;
+  let updatedProduct;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updatedProductObj = {
+    updatedProduct = {
       product_id: pId,
       product_name: pName,
       price: pPrice,
@@ -36,16 +42,20 @@ function UpdateProduct(props) {
       star_rating: pRating,
     };
     // window.alert("Product object created successfully");
-    console.table(updatedProductObj);
+    const finalUpdatedProduct = Object.fromEntries(
+      Object.entries(updatedProduct).filter(([key, value]) => value !== '')
+    );
+    console.table(finalUpdatedProduct);
 
     if (window.confirm("Do you want to update this product?")) {
-      updateProduct(updatedProductObj, props.productId)
+      updateProduct(finalUpdatedProduct, productId)
         .then((response) => {
           console.log(response.data);
-          window.alert("Data updated successfully");
+          window.alert("Product updated successfully");
+          navigate('/')
         })
         .catch((err) => {
-          window.alert("Error while updating data");
+          window.alert("Error while updating product");
           console.log(err);
         });
     }
@@ -56,98 +66,98 @@ function UpdateProduct(props) {
       <h2 className="text-center mb-3">Update Product</h2>
       <form action="" onSubmit={handleSubmit} className="mb-5">
         <div className="ff">
-          <label for="product_name">PRODUCT ID</label>
+          <label htmlFor="product_name">PRODUCT ID</label>
           <input
             type="text"
             className="form-control"
             id="product_name"
             placeholder="Enter product id"
             disabled
-            value={pId}
+            value={productId}
             onChange={(e) => setPId(e.target.value)}
           />
         </div>
 
         <div className="ff">
-          <label for="product_name">PRODUCT NAME</label>
+          <label htmlFor="product_name">PRODUCT NAME</label>
           <input
             type="text"
             className="form-control"
             id="product_name"
             placeholder="Enter product name"
-            value={pName}
+            // value={oldData.product_name}
             onChange={(e) => setpName(e.target.value)}
           />
         </div>
 
         <div className="ff">
-          <label for="product_name">PRODUCT PRICE</label>
+          <label htmlFor="product_name">PRODUCT PRICE</label>
           <input
             type="text"
             className="form-control"
             id="product_name"
             placeholder="Enter product price"
-            value={pPrice}
+            // value={oldData.price}
             onChange={(e) => setPPrice(e.target.value)}
           />
         </div>
 
         <div className="ff">
-          <label for="product_name">PRODUCT DESCRIPTION</label>
+          <label htmlFor="product_name">PRODUCT DESCRIPTION</label>
           <textarea
             type="text"
             className="form-control"
             id="product_name"
             placeholder="Enter product description"
-            value={pDesc}
+            // value={oldData.description}
             onChange={(e) => setpDesc(e.target.value)}
           ></textarea>
         </div>
 
         <div className="ff">
-          <label for="product_name">PRODUCT CODE</label>
+          <label htmlFor="product_name">PRODUCT CODE</label>
           <input
             type="text"
             className="form-control"
             id="product_name"
             placeholder="Enter product code"
-            value={pCode}
+            // value={oldData.product_code}
             onChange={(e) => setPCode(e.target.value)}
           />
         </div>
 
         <div className="ff">
-          <label for="product_name">PRODUCT RELEASE DATE</label>
+          <label htmlFor="product_name">PRODUCT RELEASE DATE</label>
           <input
             type="date"
             className="form-control"
             id="product_name"
             placeholder="Enter product release date"
-            value={pRelDate}
+            // value={oldData.release_date}
             onChange={(e) => setPRelDate(e.target.value)}
           />
         </div>
 
         <div className="ff">
-          <label for="product_name">PRODUCT URL</label>
+          <label htmlFor="product_name">PRODUCT URL</label>
           <input
             type="text"
             className="form-control"
             id="product_name"
             placeholder="Enter product url"
-            value={pUrl}
+            // value={oldData.image_url}
             onChange={(e) => setPUrl(e.target.value)}
           />
         </div>
 
         <div className="ff">
-          <label for="product_name">PRODUCT RATING</label>
+          <label htmlFor="product_name">PRODUCT RATING</label>
           <input
             type="text"
             className="form-control"
             id="product_name"
             placeholder="Enter product rating"
-            value={pRating}
+            // value={oldData.star_rating}
             onChange={(e) => setPRating(e.target.value)}
           />
         </div>

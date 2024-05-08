@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { getProduct } from "../../services/productservices";
 import "./singleProduct.css";
-import UpdateProduct from "../update-product/UpdateProduct";
+// import UpdateProduct from "../update-product/UpdateProduct";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SingleProduct() {
   const [product, setProduct] = useState({});
   const [errMsg, setErrMsg] = useState("");
   const [respStatus, setRespStatus] = useState(false);
 
+  const { prodId } = useParams();
+
   const getData = () => {
-    getProduct(10)
+    getProduct(prodId)
       .then((response) => {
         const data = response.data;
+        console.log(response);
         setProduct(data);
         setErrMsg("");
         setRespStatus(true);
@@ -27,9 +32,6 @@ function SingleProduct() {
     getData();
   }, []);
 
-  const loadUpdateComp = () => {
-    <UpdateProduct productId={product.product_id}/> 
-  }
 
   let design;
   if (!respStatus) {
@@ -68,8 +70,16 @@ function SingleProduct() {
               <td>{product.star_rating}</td>
             </tr>
             <tr>
-              <td><button className="btn btn-dark">Back</button> </td>
-              <td><button className="btn btn-dark" onClick={loadUpdateComp}>Edit</button> </td>
+              <td>
+                <Link  to={`/`}>
+                <button className="btn btn-dark">Back</button>
+                </Link>
+                 </td>
+              <td>
+                <Link to={`/update/${product.product_id}`}>
+                <button className="btn btn-dark" >Edit</button> 
+                </Link>
+                </td>
             </tr>
           </tbody>
         </table>
