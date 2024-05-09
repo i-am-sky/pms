@@ -4,21 +4,24 @@ import AddProduct from "../add-product/AddProduct";
 import Products from "../products/Products";
 import UpdateProduct from "../update-product/UpdateProduct";
 import SingleProduct from "../single-product/SingleProduct";
+import Home from "../home/Home";
+
+import "./navbarStyle.css";
 
 function Navbar() {
-
   const linkStyle = {
-    textDecoration: 'none',
-    color: 'white',
-    margin: '0 10px 0',
-  }
+    textDecoration: "none",
+    color: "white",
+    margin: "0 10px 0",
+    padding: "auto",
+  };
 
   return (
     <BrowserRouter>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <div className="container-fluid p-2">
-          <Link className="navbar-brand ps-2" to="/">
-            Product Management System
+          <Link className="navbar-brand ps-2 h1 py-auto" to="/">
+            PRODUCT MANAGEMENT SYSTEM
           </Link>
           <button
             className="navbar-toggler"
@@ -28,23 +31,30 @@ function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div
+            className="collapse navbar-collapse"
+            style={{ textAlign: "left" }}
+            id="navbarNav"
+          >
             <ul className="navbar-nav">
-              <Link  style={linkStyle} className="nav-item" to="/">
-                Home
+              <span style={{ margin: "0 5px 0", color: "#aaa" }}>|</span>
+              <Link style={linkStyle} className="nav-item" to="/">
+                <span className="item">HOME</span>
               </Link>
+              <span style={{ margin: "0 5px 0", color: "#aaa" }}>|</span>
               <Link style={linkStyle} className="nav-item" to="/products">
-                Products
+                <span className="item">PRODUCTS</span>
               </Link>
-              <Link  style={linkStyle} className="nav-item" to="/add">
-                Add Product
+              <span style={{ margin: "0 5px 0", color: "#aaa" }}>|</span>
+              <Link style={linkStyle} className="nav-item" to="/add">
+                <span className="item">ADD PRODUCT</span>
               </Link>
             </ul>
           </div>
         </div>
       </nav>
       <Routes>
-        <Route path="/" element={<Products />} />
+        <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/add" element={<AddProduct />} />
         <Route path="/update/:productId" element={<UpdateProduct />} />

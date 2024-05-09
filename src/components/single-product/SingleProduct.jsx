@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getProduct } from "../../services/productservices";
 import "./singleProduct.css";
 // import UpdateProduct from "../update-product/UpdateProduct";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function SingleProduct() {
   const [product, setProduct] = useState({});
@@ -11,6 +10,8 @@ function SingleProduct() {
   const [respStatus, setRespStatus] = useState(false);
 
   const { prodId } = useParams();
+
+  const navigate = useNavigate()
 
   const getData = () => {
     getProduct(prodId)
@@ -32,7 +33,6 @@ function SingleProduct() {
     getData();
   }, []);
 
-
   let design;
   if (!respStatus) {
     design = <span>Loading...</span>;
@@ -43,48 +43,48 @@ function SingleProduct() {
   } else {
     design = (
       <div className="product-display">
-        <table className="table table-hover">
-          <tbody>
-            <tr>
-              <td>PRODUCT NAME: </td>
-              <td>{product.product_name}</td>
-            </tr>
-            <tr>
-              <td>DESCRIPTION: </td>
-              <td>{product.description}</td>
-            </tr>
-            <tr>
-              <td>PRODUCT CODE: </td>
-              <td>{product.product_code}</td>
-            </tr>
-            <tr>
-              <td>PRODUCT AVAILABILITY: </td>
-              <td>{product.release_date}</td>
-            </tr>
-            <tr>
-              <td>PRICE: </td>
-              <td>{product.price}</td>
-            </tr>
-            <tr>
-              <td>PRODUCT RATING: </td>
-              <td>{product.star_rating}</td>
-            </tr>
-            <tr>
-              <td>
-                <Link  to={`/`}>
-                <button className="btn btn-dark">Back</button>
-                </Link>
-                 </td>
-              <td>
-                <Link to={`/update/${product.product_id}`}>
-                <button className="btn btn-dark" >Edit</button> 
-                </Link>
+        <div className="tbl-div">
+          <table className="table table-hover">
+            <tbody>
+              <tr>
+                <td>PRODUCT NAME: </td>
+                <td>{product.product_name}</td>
+              </tr>
+              <tr>
+                <td>DESCRIPTION: </td>
+                <td>{product.description}</td>
+              </tr>
+              <tr>
+                <td>PRODUCT CODE: </td>
+                <td>{product.product_code}</td>
+              </tr>
+              <tr>
+                <td>PRODUCT AVAILABILITY: </td>
+                <td>{product.release_date}</td>
+              </tr>
+              <tr>
+                <td>PRICE: </td>
+                <td>$&nbsp;{product.price}</td>
+              </tr>
+              <tr>
+                <td>PRODUCT RATING: </td>
+                <td>{product.star_rating}</td>
+              </tr>
+              <tr>
+                <td>
+                    <button className="btn btn-dark" onClick={() => navigate(-1)} >BACK</button>
                 </td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="pe-5">
-          <img src={product.image_url} width={350} />
+                <td>
+                  <Link to={`/update/${product.product_id}`}>
+                    <button className="btn btn-dark">EDIT</button>
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="pe-5 img-div">
+          <img className="product-image" src={product.image_url} />
         </div>
       </div>
     );

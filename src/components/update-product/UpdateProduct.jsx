@@ -1,21 +1,20 @@
-import React, { useState } from "react";
-import { updateProduct } from "../../services/productservices";
+import React, { useEffect, useState } from "react";
+import { getProduct, updateProduct } from "../../services/productservices";
 import { useNavigate, useParams } from "react-router-dom";
 
 function UpdateProduct() {
-
   const { productId } = useParams();
 
   const [pId, setPId] = useState(productId);
-  const [pName, setpName] = useState('');
-  const [pPrice, setPPrice] = useState('');
-  const [pDesc, setpDesc] = useState('');
-  const [pCode, setPCode] = useState('');
-  const [pRelDate, setPRelDate] = useState('');
-  const [pUrl, setPUrl] = useState('');
-  const [pRating, setPRating] = useState('');
+  const [pName, setpName] = useState("");
+  const [pPrice, setPPrice] = useState("");
+  const [pDesc, setpDesc] = useState("");
+  const [pCode, setPCode] = useState("");
+  const [pRelDate, setPRelDate] = useState("");
+  const [pUrl, setPUrl] = useState("");
+  const [pRating, setPRating] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const divStyles = {
     position: "absolute",
@@ -26,6 +25,20 @@ function UpdateProduct() {
     textAlign: "left",
     marginBottom: "50px",
   };
+
+  const getOldProduct = () => {
+    getProduct(productId)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getOldProduct();
+  }, []);
 
   let updatedProduct;
 
@@ -43,7 +56,7 @@ function UpdateProduct() {
     };
     // window.alert("Product object created successfully");
     const finalUpdatedProduct = Object.fromEntries(
-      Object.entries(updatedProduct).filter(([key, value]) => value !== '')
+      Object.entries(updatedProduct).filter(([key, value]) => value !== "")
     );
     console.table(finalUpdatedProduct);
 
@@ -52,7 +65,7 @@ function UpdateProduct() {
         .then((response) => {
           console.log(response.data);
           window.alert("Product updated successfully");
-          navigate('/')
+          navigate(-1);
         })
         .catch((err) => {
           window.alert("Error while updating product");
@@ -61,9 +74,23 @@ function UpdateProduct() {
     }
   };
 
+  const backBtn = {
+    position: "absolute",
+    top: "10px",
+    left: "-20px",
+    transform: "translateX(-50%)",
+    width: 'fit-content',
+    marginBottom: "50px",
+    backgroundColor: '#ddd',
+  }
+
+
   let design = (
     <div className="container m-5" style={divStyles}>
-      <h2 className="text-center mb-3">Update Product</h2>
+      <div>
+      <button type="button" style={backBtn} className="btn" onClick={() => navigate(-1)} >BACK</button>
+      <h1 className="text-center mb-5">UPDATE PRODUCT</h1>
+      </div>
       <form action="" onSubmit={handleSubmit} className="mb-5">
         <div className="ff">
           <label htmlFor="product_name">PRODUCT ID</label>
@@ -164,7 +191,7 @@ function UpdateProduct() {
 
         <div className="text-center">
           <button className="btn btn-dark w-50 mt-2" type="submit">
-            Submit
+            SUBMIT
           </button>
         </div>
       </form>

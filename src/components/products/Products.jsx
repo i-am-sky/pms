@@ -42,14 +42,14 @@ const Products = () => {
     design = <span>NO RECORDS FOUND</span>;
   } else {
     design = (
-      <div className="container">
-        <select onClick={selectHandler}>
+      <div className="container" style={{minWidth:'600px', width:'80%'}}>
+        <select onClick={selectHandler} style={{width:'10rem', textAlign:'center'}}>
           <option selected disabled value={selectState}>
-            --sort--
+            SORT BY --
           </option>
-          <option value={2}>Sort By Name</option>
-          <option value={3}>Sort By Price</option>
-          <option value={8}>Sort By Rating</option>
+          <option value={2}>SORT BY NAME</option>
+          <option value={3}>SORT BY PRICE</option>
+          <option value={8}>SORT BY RATING</option>
         </select>
         <table className="table table-hover">
           <thead>

@@ -42,11 +42,11 @@ function AddProduct() {
     // window.alert("Product object created successfully")
     console.table(newProductObj);
 
-    if (window.confirm("do you want to add the product")) {
+    if (window.confirm("do you want to add this product")) {
       addProduct(newProductObj)
         .then((response) => {
           window.alert("Product added successfully");
-          console.log(response.data);
+          console.log(response);
           navigate("/products");
         })
         .catch((err) => {
@@ -58,7 +58,7 @@ function AddProduct() {
 
   let design = (
     <div className="container m-5" style={divStyles}>
-      <h1>Add Product</h1>
+      <h1 className="text-center mb-5">ADD PRODUCT</h1>
       <form action="" onSubmit={handleSubmit} className="mb-5">
         <div className="ff">
           <label for="product_name">PRODUCT ID</label>
@@ -158,11 +158,11 @@ function AddProduct() {
 
         <div className="text-center">
           <button className="btn btn-dark w-25 mx-3 mt-2 " type="submit">
-            Submit
+            SUBMIT
           </button>
           <Link  to={`/`}>
           <button className="btn btn-danger w-25 mx-3 mt-2" type="button">
-            Cancle
+            CANCEL
           </button>
           </Link>
         </div>
