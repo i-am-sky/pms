@@ -8,12 +8,14 @@ const DeleteProduct = (props) => {
         .then((response) => {
           console.log("Response : ", response.data);
           console.log("delete successful");
+          props.deleteStatus(true)
         })
         .catch((err) => {
           console.log(err);
         });
     }
   };
+
 
   let design = (
     <button className="btn btn-outline-danger" onClick={deleteProductFn}>

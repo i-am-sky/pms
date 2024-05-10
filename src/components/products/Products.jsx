@@ -10,6 +10,8 @@ const Products = () => {
   const [requestStatus, setRequestStatus] = useState(false);
   const [selectState, setSelectState] = useState(2);
 
+  const [isDeleted, setIsDeleted] = useState(false);
+
   const getData = () => {
     getProducts(selectState)
       .then((response) => {
@@ -25,9 +27,13 @@ const Products = () => {
       });
   };
 
+  const handleDeleteStatus = (dataFromDelete) => {
+    setIsDeleted(dataFromDelete);
+  };
+
   useEffect(() => {
     getData();
-  }, [selectState]);
+  }, [selectState, isDeleted]);
 
   const selectHandler = (e) => {
     setSelectState(e.target.value);
@@ -42,8 +48,11 @@ const Products = () => {
     design = <span>NO RECORDS FOUND</span>;
   } else {
     design = (
-      <div className="container" style={{minWidth:'600px', width:'80%'}}>
-        <select onClick={selectHandler} style={{width:'10rem', textAlign:'center'}}>
+      <div className="container" style={{ minWidth: "600px", width: "80%" }}>
+        <select
+          onClick={selectHandler}
+          style={{ width: "10rem", textAlign: "center" }}
+        >
           <option selected disabled value={selectState}>
             SORT BY --
           </option>
@@ -73,7 +82,10 @@ const Products = () => {
                 <td>$&nbsp;{product.price}</td>
                 <td>{product.star_rating}</td>
                 <td>
-                  <DeleteProduct productId={product.product_id} />
+                  <DeleteProduct
+                    deleteStatus={handleDeleteStatus}
+                    productId={product.product_id}
+                  />
                 </td>
               </tr>
             ))}
