@@ -81,6 +81,13 @@ function AddProduct() {
             placeholder="Enter product name"
             // value={pName}
             onChange={(e) => setpName(e.target.value)}
+            onBlur={(e) => {
+              e.target.value === "" ? (
+                <span>Plsease Enter product name</span>
+              ) : (
+                <span></span>
+              );
+            }}
           />
         </div>
 
@@ -157,13 +164,13 @@ function AddProduct() {
         </div>
 
         <div className="text-center">
-          <button className="btn btn-dark w-25 mx-3 mt-2 " type="submit">
+          <button className="btn btn-primary w-25 mx-3 mt-2" type="submit">
             SUBMIT
           </button>
-          <Link  to={`/`}>
-          <button className="btn btn-danger w-25 mx-3 mt-2" type="button">
-            CANCEL
-          </button>
+          <Link to={`/`}>
+            <button className="btn btn-danger w-25 mx-3 mt-2" type="button">
+              CANCEL
+            </button>
           </Link>
         </div>
       </form>

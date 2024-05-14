@@ -18,10 +18,10 @@ function Navbar() {
 
   return (
     <BrowserRouter>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-        <div className="container-fluid p-2">
-          <Link className="navbar-brand ps-2 h1 py-auto" to="/">
-            PRODUCT MANAGEMENT SYSTEM
+      <nav className="navbar navbar-expand-md bg-primary">
+        <div className="container-fluid">
+          <Link  to="/">
+            <span className="navbar-brand text-white  ">PRODUCT MANAGEMENT SYSTEM</span>
           </Link>
           <button
             className="navbar-toggler"
@@ -37,17 +37,32 @@ function Navbar() {
             id="navbarNav"
           >
             <ul className="navbar-nav">
-              <span style={{ margin: "0 5px 0", color: "#aaa" }}>|</span>
+              <span
+                className="divider"
+                style={{ margin: "0 5px 0", color: "#aaa" }}
+              >
+                |
+              </span>
               <Link style={linkStyle} className="nav-item" to="/">
-                <span className="item">HOME</span>
+                <span className="item active">HOME</span>
               </Link>
-              <span style={{ margin: "0 5px 0", color: "#aaa" }}>|</span>
+              <span
+                className="divider"
+                style={{ margin: "0 5px 0", color: "#aaa" }}
+              >
+                |
+              </span>
               <Link style={linkStyle} className="nav-item" to="/products">
-                <span className="item">PRODUCTS</span>
+                <span className=" item">PRODUCTS</span>
               </Link>
-              <span style={{ margin: "0 5px 0", color: "#aaa" }}>|</span>
+              <span
+                className="divider"
+                style={{ margin: "0 5px 0", color: "#aaa" }}
+              >
+                |
+              </span>
               <Link style={linkStyle} className="nav-item" to="/add">
-                <span className="item">ADD PRODUCT</span>
+                <span className=" item">ADD PRODUCT</span>
               </Link>
             </ul>
           </div>

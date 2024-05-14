@@ -72,11 +72,11 @@ function SingleProduct() {
               </tr>
               <tr>
                 <td>
-                    <button className="btn btn-dark" onClick={() => navigate(-1)} >BACK</button>
+                    <button className="btn btn-primary" onClick={() => navigate(-1)} >BACK</button>
                 </td>
                 <td>
                   <Link to={`/update/${product.product_id}`}>
-                    <button className="btn btn-dark">EDIT</button>
+                    <button className="btn btn-primary">EDIT</button>
                   </Link>
                 </td>
               </tr>

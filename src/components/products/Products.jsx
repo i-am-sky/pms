@@ -10,7 +10,7 @@ const Products = () => {
   const [requestStatus, setRequestStatus] = useState(false);
   const [selectState, setSelectState] = useState(2);
 
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(0);
 
   const getData = () => {
     getProducts(selectState)
@@ -19,6 +19,7 @@ const Products = () => {
         setProductData(respData);
         setErrMsg("");
         setRequestStatus(true);
+        console.table(respData)
       })
       .catch((err) => {
         setErrMsg(err.message);
@@ -72,13 +73,13 @@ const Products = () => {
           </thead>
           <tbody>
             {productData.map((product) => (
-              <tr key={product.product_id}>
-                <td>
+              <tr key={product.product_id}  style={{dislpay:'flex'}}>
+                <td >
                   <Link to={`/product/${product.product_id}`} state={product}>
-                    <img src={product.image_url} alt="" width={100} />
+                    <img src={product.image_url} width={100} />
                   </Link>
                 </td>
-                <td>{product.product_name}</td>
+                <td style={{alignSelf:'center'}}>{product.product_name}</td>
                 <td>$&nbsp;{product.price}</td>
                 <td>{product.star_rating}</td>
                 <td>
