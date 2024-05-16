@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import AddProduct from "../add-product/AddProduct";
 import Products from "../products/Products";
 import UpdateProduct from "../update-product/UpdateProduct";
-import SingleProduct from "../single-product/SingleProduct";
+// import SingleProduct from "../single-product/SingleProduct";
 import Home from "../home/Home";
 
 import "./navbarStyle.css";
+import SingleProductWithRedux from "../single-product/SingleProductWithRedux";
 
 function Navbar() {
   const linkStyle = {
@@ -73,7 +74,7 @@ function Navbar() {
         <Route path="/products" element={<Products />} />
         <Route path="/add" element={<AddProduct />} />
         <Route path="/update/:productId" element={<UpdateProduct />} />
-        <Route path="/product/:prodId" element={<SingleProduct />} />
+        <Route path="/product/:prodId" element={<SingleProductWithRedux />} />
       </Routes>
     </BrowserRouter>
   );
