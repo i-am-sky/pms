@@ -1,0 +1,15 @@
+/* .item:hover {
+    font-weight: bold !important;
+}  */
+
+.divider {
+    margin:'0 5px 0';
+     color:'#aaa' !important;
+}
+
+
+@media (max-width: 767px) {
+    .divider{
+        display: none
+    }
+}
