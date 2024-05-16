@@ -84,7 +84,7 @@ function SingleProduct() {
           </table>
         </div>
         <div className="pe-5 img-div">
-          <img className="product-image" src={product.image_url} />
+          <img className="product-image" src={product.image_url} alt="product" />
         </div>
       </div>
     );
