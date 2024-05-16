@@ -161,7 +161,10 @@ function UpdateProduct() {
             }
           />
         </div>
-        <span className="text-danger">{nameValidation(product.product_name)}</span>
+        <span className="text-danger">
+          {" "}
+          {errors.name.length > 0 ? errors.name : ""}{" "}
+        </span>
 
         <div className="ff">
           <label htmlFor="price">PRODUCT PRICE</label>
@@ -181,7 +184,10 @@ function UpdateProduct() {
             }
           />
         </div>
-        <span className="text-danger">{priceValidation(product.price)}</span>
+        <span className="text-danger">
+          {" "}
+          {errors.price.length > 0 ? errors.price : ""}{" "}
+        </span>
 
         <div className="ff">
           <label htmlFor="description">PRODUCT DESCRIPTION</label>
@@ -201,7 +207,10 @@ function UpdateProduct() {
             }
           ></textarea>
         </div>
-        <span className="text-danger">{descriptionValidation(product.description)}</span>
+        <span className="text-danger">
+          {" "}
+          {errors.description.length > 0 ? errors.description : ""}{" "}
+        </span>
 
         <div className="ff">
           <label htmlFor="product_code">PRODUCT CODE</label>
@@ -221,7 +230,10 @@ function UpdateProduct() {
             }
           />
         </div>
-        <span className="text-danger">{productCodeValidation(product.product_code)}</span>
+        <span className="text-danger">
+          {" "}
+          {errors.code.length > 0 ? errors.code : ""}{" "}
+        </span>
 
         <div className="ff">
           <label htmlFor="release_date">PRODUCT RELEASE DATE</label>
@@ -241,7 +253,10 @@ function UpdateProduct() {
             }
           />
         </div>
-        <span className="text-danger">{releaseDateValidation(product.release_date)}</span>
+        <span className="text-danger">
+          {" "}
+          {errors.rDate.length > 0 ? errors.rDate : ""}{" "}
+        </span>
 
         <div className="ff">
           <label htmlFor="image_url">PRODUCT URL</label>
@@ -261,7 +276,10 @@ function UpdateProduct() {
             }
           />
         </div>
-        <span className="text-danger">{urlValidation(product.image_url)}</span>
+        <span className="text-danger">
+          {" "}
+          {errors.url.length > 0 ? errors.url : ""}{" "}
+        </span>
 
         <div className="ff">
           <label htmlFor="star_rating">PRODUCT RATING</label>
@@ -281,7 +299,10 @@ function UpdateProduct() {
             }
           />
         </div>
-        <span className="text-danger">{ratingValidation(product.star_rating)}</span>
+        <span className="text-danger">
+          {" "}
+          {errors.rating.length > 0 ? errors.rating : ""}{" "}
+        </span>
 
         <div className="text-center">
           <button className="btn btn-primary w-25 mx-3 mt-2" type="submit">

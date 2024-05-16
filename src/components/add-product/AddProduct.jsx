@@ -64,18 +64,18 @@ function AddProduct() {
     });
 
     setIsFormValid(
-      pId &&
+        pId &&
         pName &&
         pPrice &&
         pDesc &&
         pCode &&
         pRelDate &&
         pUrl &&
-        pRating &&
-        true
+        pRating && true
     );
 
-    console.log("is form valid: ", isFormValid);
+    console.log('is form valid: ', isFormValid);
+
   };
 
   const handleSubmit = (e) => {
@@ -129,10 +129,16 @@ function AddProduct() {
             className="form-control"
             id="product_name"
             placeholder="Enter product name"
-            onChange={(e) => setpName(e.target.value)}
+            onChange={(e) => {
+              nameValidation(e.target.value) === ""
+                ? setpName(e.target.value)
+                : setpName("");
+            }}
           />
         </div>
-        <span className="text-danger">{nameValidation(pName)}</span>
+        <span className="text-danger">
+          {errors.name.length > 0 ? errors.name : ""}
+        </span>
 
         <div className="ff">
           <label for="product_name">PRODUCT PRICE</label>
@@ -141,11 +147,16 @@ function AddProduct() {
             className="form-control"
             id="price"
             placeholder="Enter product price"
-            onChange={(e) => setPPrice(e.target.value)}
+            onChange={(e) => {
+              priceValidation(e.target.value) === ""
+                ? setPPrice(e.target.value)
+                : setPPrice("");
+            }}
           />
         </div>
-        <span className="text-danger">{priceValidation(pPrice)}</span>
-
+        <span className="text-danger">
+          {errors.price.length > 0 ? errors.price : ""}
+        </span>
 
         <div className="ff">
           <label for="product_name">PRODUCT DESCRIPTION</label>
@@ -154,11 +165,16 @@ function AddProduct() {
             className="form-control"
             id="description"
             placeholder="Enter product description"
-            onChange={(e) => setpDesc(e.target.value)}
+            onChange={(e) => {
+              descriptionValidation(e.target.value) === ""
+                ? setpDesc(e.target.value)
+                : setpDesc("");
+            }}
           ></textarea>
         </div>
-        <span className="text-danger">{descriptionValidation(pDesc)}</span>
-
+        <span className="text-danger">
+          {errors.description.length > 0 ? errors.description : ""}
+        </span>
 
         <div className="ff">
           <label for="product_name">PRODUCT CODE</label>
@@ -167,11 +183,16 @@ function AddProduct() {
             className="form-control"
             id="product_name"
             placeholder="Enter product code"
-            onChange={(e) => setPCode(e.target.value)}
+            onChange={(e) => {
+              productCodeValidation(e.target.value) === ""
+                ? setPCode(e.target.value)
+                : setPCode("");
+            }}
           />
         </div>
-        <span className="text-danger">{productCodeValidation(pCode)}</span>
-
+        <span className="text-danger">
+          {errors.code.length > 0 ? errors.code : ""}
+        </span>
 
         <div className="ff">
           <label for="product_name">PRODUCT RELEASE DATE</label>
@@ -180,11 +201,16 @@ function AddProduct() {
             className="form-control"
             id="product_name"
             placeholder="Enter product release date"
-            onChange={(e) => setPRelDate(e.target.value)}
+            onChange={(e) => {
+              releaseDateValidation(e.target.value) === ""
+                ? setPRelDate(e.target.value)
+                : setPRelDate("");
+            }}
           />
         </div>
-        <span className="text-danger">{releaseDateValidation(pRelDate)}</span>
-
+        <span className="text-danger">
+          {errors.rDate.length > 0 ? errors.rDate : ""}
+        </span>
 
         <div className="ff">
           <label for="product_name">PRODUCT URL</label>
@@ -193,11 +219,16 @@ function AddProduct() {
             className="form-control"
             id="product_name"
             placeholder="Enter product url"
-            onChange={(e) => setPUrl(e.target.value)}
+            onChange={(e) => {
+              urlValidation(e.target.value)
+                ? setPUrl(e.target.value)
+                : setPUrl("");
+            }}
           />
         </div>
-        <span className="text-danger">{urlValidation(pUrl)}</span>
-
+        <span className="text-danger">
+          {errors.url.length > 0 ? errors.url : ""}
+        </span>
 
         <div className="ff">
           <label for="product_name">PRODUCT RATING</label>
@@ -206,11 +237,16 @@ function AddProduct() {
             className="form-control"
             id="product_name"
             placeholder="Enter product rating"
-            onChange={(e) => setPRating(e.target.value)}
+            onChange={(e) => {
+              ratingValidation(e.target.value) === ""
+                ? setPRating(e.target.value)
+                : setPRating("");
+            }}
           />
         </div>
-        <span className="text-danger">{" "}{ratingValidation(pRating)}{" "}</span>
-
+        <span className="text-danger">
+          {errors.rating.length > 0 ? errors.rating : ""}
+        </span>
 
         <div className="text-center">
           <button className="btn btn-primary w-25 mx-3 mt-2" type="submit">
